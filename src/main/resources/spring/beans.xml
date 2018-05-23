@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user001" class="com.lz.spring.bean.User">
+        <constructor-arg index="0" name="id" value="1001" type="int"/>
+        <constructor-arg index="1" name="name" value="Luzhen" type="java.lang.String"/>
+        <constructor-arg index="2" name="age" value="23" type="int"/>
+        <property name="book" ref="book001"/>
+    </bean>
+
+    <bean id="book001" class="com.lz.spring.bean.Book">
+        <constructor-arg index="0" name="id" value="2001" type="int"/>
+        <constructor-arg index="1" name="title" value="C++ Primer" type="java.lang.String"/>
+        <property name="owner" ref="user001"/>
+    </bean>
+
+    <bean id="beanOne" class="com.lz.spring.bean.ExampleBean" depends-on="manage"/>
+
+    <bean id="manage" class="com.lz.spring.bean.ManageBean"/>
+
+    <bean id="bar1" class="com.lz.spring.bean.Bar" autowire-candidate="false"/>
+
+    <bean id="bar2" class="com.lz.spring.bean.Bar"/>
+
+    <bean id="foo" class="com.lz.spring.bean.Foo"/>
+
+    <bean id="box" class="com.lz.spring.bean.Box" autowire="byType"/>
+
+    <bean id="myCommand" class="com.lz.spring.bean.Command" scope="prototype"/>
+
+    <bean id="commandManager" class="com.lz.spring.bean.CommandManager">
+        <lookup-method name="createCommand" bean="myCommand"/>
+    </bean>
+</beans>
